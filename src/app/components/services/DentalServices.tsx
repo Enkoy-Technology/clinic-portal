@@ -87,7 +87,7 @@ const serviceColumn2 = [
 
 const serviceColumn3 = [
   {
-    image: "https://images.unsplash.com/photo-1599818817367-7b83d73af460?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=800",
     title: "Pediatric Dentistry",
     height: "h-[340px]"
   },

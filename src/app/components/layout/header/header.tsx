@@ -1,11 +1,11 @@
 "use client";
 
 import {
-  AppShell,
-  Box,
-  Button,
-  Group,
-  Menu
+    AppShell,
+    Box,
+    Button,
+    Group,
+    Menu
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { ChevronDown, Globe, Phone } from "lucide-react";
@@ -41,8 +41,9 @@ const Header: React.FC = () => {
           <Image
             src="/logo1.png"
             alt="Dr. Hilina Specialty Dental"
-            width={140}
             height={50}
+            width={140}
+            style={{ width: "auto", height: "50px" }}
             className="object-contain"
             priority
           />

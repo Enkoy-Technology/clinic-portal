@@ -1,29 +1,25 @@
 "use client";
-import { AppShell, Loader } from "@mantine/core";
-import { ScrollTopAffix, useIsMounted } from "../../../shared";
+import { AppShell } from "@mantine/core";
+import { ScrollTopAffix } from "../../../shared";
 import Footer from "./footer/footer";
 import Header from "./header/header";
 
 const RootPortalLayout = ({ children }: { children: React.ReactNode }) => {
-  const mounted = useIsMounted();
-
-  if (!mounted) {
-    return (
-      <div className="min-h-screen relative">
-        <Loader />
-      </div>
-    );
-  } else {
-    return (
-      <AppShell className="flex flex-col min-h-screen">
-        {/* <TopHeader /> */}
-        <Header />
-        <div>{children}</div>
-        <Footer />
-        <ScrollTopAffix />
-      </AppShell>
-    );
-  }
+  return (
+    <AppShell header={{ height: 80 }}>
+      {/* <TopHeader /> */}
+      <Header />
+      <AppShell.Main>
+        <div className="flex flex-col min-h-[calc(100vh-80px)]">
+          <div className="flex-grow">{children}</div>
+        </div>
+      </AppShell.Main>
+      <Footer />
+      <ScrollTopAffix />
+    </AppShell>
+  );
 };
+
+
 
 export default RootPortalLayout;
