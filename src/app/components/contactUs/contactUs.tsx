@@ -12,19 +12,126 @@ import {
     ThemeIcon,
     Title
 } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import { Clock, Mail, MapPin, Phone, Send } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
+import { useCreatePatientWithAppointmentMutation } from "../../../shared/api/appointmentsApi";
+
+const COUNTRY_CODE = "+251";
+
+function normalizeETPhone(input: string) {
+  const digits = input.replace(/[^\d]/g, "");
+  const local = digits.startsWith("251") ? digits.slice(3) : digits;
+  const trimmed = local.slice(0, 9);
+  return trimmed;
+}
+
+function splitName(fullName: string) {
+  const parts = fullName.trim().split(" ");
+  const firstName = parts[0] || "";
+  const lastName = parts.slice(1).join(" ") || firstName;
+  return { firstName, lastName };
+}
+
+function generatePassword() {
+  return `Temp${Math.floor(Math.random() * 10000)}!`;
+}
+
+function formatDateForAPI(date: Date) {
+  return date.toISOString().split("T")[0];
+}
 
 export function ContactSection() {
-  const [loading, setLoading] = useState(false);
+  const [createAppointment, { isLoading }] = useCreatePatientWithAppointmentMutation();
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-        setLoading(false);
-        // Reset or show success logic here
-    }, 2000);
+
+    // Validate form (email is optional)
+    if (!formData.fullName || !formData.phone) {
+      notifications.show({
+        title: "Missing Information",
+        message: "Please fill in all required fields",
+        color: "red",
+      });
+      return;
+    }
+
+    try {
+      const { firstName, lastName } = splitName(formData.fullName);
+      const normalizedPhone = normalizeETPhone(formData.phone);
+      const fullPhoneNumber = COUNTRY_CODE + normalizedPhone;
+
+      // Set default date to tomorrow
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+
+      // Default appointment time 10:00 AM - 10:30 AM
+      const payload = {
+        profile: {
+          user: {
+            email: formData.email || `temp${Date.now()}@example.com`,
+            password: generatePassword(),
+            first_name: firstName,
+            last_name: lastName,
+          },
+          role: "PATIENT",
+          phone_number: fullPhoneNumber,
+        },
+        address: {
+          city: "Addis Ababa",
+          state: "Addis Ababa",
+          street: "N/A",
+          postal_code: "1000",
+          country: 1,
+        },
+        age: 0,
+        dob: "2000-01-01",
+        gender: "MALE",
+        patient_status: "PENDING",
+        telegram_username: "",
+        note: formData.message || "",
+        profile_picture: null,
+        branch: null,
+        doctor: null,
+        service: null,
+        scheduled_date: formatDateForAPI(tomorrow),
+        start_time: "10:00:00",
+        end_time: "10:30:00",
+        appointment_status: "SCHEDULED",
+        reason: "General Consultation",
+        notes: formData.message || "",
+      };
+
+      await createAppointment(payload as any).unwrap();
+
+      notifications.show({
+        title: 'Message Sent Successfully 🎉',
+        message: 'We have received your message and will contact you shortly.',
+        color: 'green',
+      });
+
+      // Reset form
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    } catch (error: any) {
+      console.error("Error creating appointment:", error);
+      notifications.show({
+        title: "Failed to Send",
+        message: error?.data?.message || "There was an error sending your message. Please try again.",
+        color: "red",
+      });
+    }
   };
 
   return (
@@ -95,7 +202,7 @@ export function ContactSection() {
             <Paper
                 p={40}
                 radius="xl"
-                className="bg-white border border-gray-100 shadow-xl h-full flex flex-col justify-center relative overlow-hidden"
+                className="bg-white border border-gray-100 shadow-xl h-full flex flex-col justify-center relative overflow-hidden"
             >
                 {/* Decorative */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#19b5af]/10 rounded-bl-full opacity-50" />
@@ -105,38 +212,34 @@ export function ContactSection() {
                 </Title>
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 z-10">
-                    <Grid gutter="md">
-                        <Grid.Col span={{ base: 12, sm: 6 }}>
-                             <TextInput
-                                label="First Name"
-                                placeholder="John"
-                                size="md"
-                                classNames={{ input: "bg-gray-50 border-gray-200 focus:border-[#19b5af] focus:ring-1 focus:ring-[#19b5af] transition-all" }}
-                             />
-                        </Grid.Col>
-                        <Grid.Col span={{ base: 12, sm: 6 }}>
-                             <TextInput
-                                label="Last Name"
-                                placeholder="Doe"
-                                size="md"
-                                classNames={{ input: "bg-gray-50 border-gray-200 focus:border-[#19b5af] focus:ring-1 focus:ring-[#19b5af] transition-all" }}
-                             />
-                        </Grid.Col>
-                    </Grid>
+                    <TextInput
+                        label="Full Name"
+                        placeholder="John Doe"
+                        required
+                        size="md"
+                        value={formData.fullName}
+                        onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                        classNames={{ input: "bg-gray-50 border-gray-200 focus:border-[#19b5af] focus:ring-1 focus:ring-[#19b5af] transition-all" }}
+                     />
 
                     <TextInput
                         label="Email Address"
                         placeholder="john@example.com"
                         type="email"
                         size="md"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         classNames={{ input: "bg-gray-50 border-gray-200 focus:border-[#19b5af] focus:ring-1 focus:ring-[#19b5af] transition-all" }}
                      />
 
                     <TextInput
                         label="Phone Number"
-                        placeholder="+1 (555) 000-0000"
+                        placeholder="911 234 567"
                         type="tel"
+                        required
                         size="md"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         classNames={{ input: "bg-gray-50 border-gray-200 focus:border-[#19b5af] focus:ring-1 focus:ring-[#19b5af] transition-all" }}
                      />
 
@@ -145,13 +248,15 @@ export function ContactSection() {
                         placeholder="How can we help you?"
                         minRows={5}
                         size="md"
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         classNames={{ input: "bg-gray-50 border-gray-200 focus:border-[#19b5af] focus:ring-1 focus:ring-[#19b5af] transition-all" }}
                     />
 
                     <Button
                         type="submit"
                         size="lg"
-                        loading={loading}
+                        loading={isLoading}
                         className="bg-[#19b5af] hover:bg-[#14918c] text-white rounded-lg mt-4 shadow-lg shadow-[#19b5af]/20 transition-transform active:scale-95"
                         rightSection={<Send size={18} />}
                     >

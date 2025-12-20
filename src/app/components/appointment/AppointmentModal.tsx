@@ -21,6 +21,12 @@ interface AppointmentModalProps {
   onClose: () => void;
   hideService?: boolean;
   defaultService?: string;
+  initialData?: {
+    name: string;
+    email: string;
+    phone: string;
+    message: string;
+  } | null;
 }
 
 const COUNTRY_CODE = "+251";
@@ -38,7 +44,7 @@ function normalizeETPhone(input: string) {
   return trimmed;
 }
 
-export function AppointmentModal({ opened, onClose, hideService = false, defaultService = "" }: AppointmentModalProps) {
+export function AppointmentModal({ opened, onClose, hideService = false, defaultService = "", initialData = null }: AppointmentModalProps) {
   const [createAppointment, { isLoading }] = useCreatePatientWithAppointmentMutation();
   const [formData, setFormData] = useState({
     name: "",
@@ -50,12 +56,32 @@ export function AppointmentModal({ opened, onClose, hideService = false, default
     message: "",
   });
 
-  // Update service when defaultService changes (e.g., when modal opens with a new service)
+  // Update form data when initialData or defaultService changes
   useEffect(() => {
-    if (defaultService) {
+    if (initialData && opened) {
+      setFormData(prev => ({
+        ...prev,
+        name: initialData.name,
+        email: initialData.email,
+        phone: normalizeETPhone(initialData.phone),
+        message: initialData.message,
+        service: defaultService || prev.service,
+      }));
+    } else if (defaultService && opened) {
       setFormData(prev => ({ ...prev, service: defaultService }));
+    } else if (opened && !initialData) {
+      // Reset form when opening without initial data
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        date: null,
+        service: defaultService || "",
+        gender: "",
+        message: "",
+      });
     }
-  }, [defaultService, opened]);
+  }, [defaultService, opened, initialData]);
 
   // Helper function to format date for API
   const formatDateForAPI = (date: Date | null) => {

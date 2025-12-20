@@ -77,7 +77,7 @@ const TestimonialCard = ({
 
 export function Testimonials() {
   const autoplay = useRef(Autoplay({
-    delay: 4000,
+    delay: 5000,
     stopOnInteraction: false,
     stopOnMouseEnter: false
   }));
@@ -89,11 +89,11 @@ export function Testimonials() {
         scroll-behavior: smooth !important;
       }
       .mantine-Carousel-container {
-        transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        transition: transform 2s linear !important;
         will-change: transform;
       }
       .mantine-Carousel-slide {
-        transition: opacity 0.8s ease-in-out;
+        transition: opacity 0.3s ease-in-out;
       }
     `;
     document.head.appendChild(style);
@@ -176,7 +176,7 @@ export function Testimonials() {
               scrollBehavior: 'smooth'
             },
             container: {
-              transition: 'transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+              transition: 'transform 2s linear',
               willChange: 'transform'
             },
             control: {
