@@ -48,7 +48,7 @@ export function Story() {
         </Box>
       </Modal>
 
-      <Box className="px-4 sm:px-6 md:px-12 lg:px-24 xl:px-36 py-10 sm:py-12 md:py-16 lg:py-20" ref={ref}>
+      <Box className="px-4 sm:px-6 md:px-12 lg:px-24 xl:px-36 py-12 md:py-16" ref={ref}>
         <Grid justify="flex-center" align="stretch" gutter={{ base: 'lg', sm: 'xl' }}>
           <Grid.Col span={{ base: 12, md: 5 }} className="relative mb-12 md:mb-0">
             <motion.div
@@ -63,7 +63,7 @@ export function Story() {
               <Image
                 src={"docs.jpg"}
                 radius="lg"
-                className="rounded-lg w-full h-[280px] sm:h-[320px] md:h-[360px] lg:h-[400px] object-cover border-4 border-white shadow-lg"
+                className="rounded-lg w-full h-[420px] sm:h-[480px] md:h-[540px] lg:h-[600px] object-cover border-4 border-white shadow-lg"
                 alt="Doctor Image"
               />
             </motion.div>

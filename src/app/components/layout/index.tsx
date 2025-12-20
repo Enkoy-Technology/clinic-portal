@@ -6,7 +6,7 @@ import Header from "./header/header";
 
 const RootPortalLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <AppShell header={{ height: 80 }}>
+    <AppShell>
       {/* <TopHeader /> */}
       <Header />
       <AppShell.Main>

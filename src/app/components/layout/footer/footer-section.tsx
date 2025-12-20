@@ -149,7 +149,7 @@ export function FooterSection() {
         {/* Bottom Bar */}
         <div className="border-t border-white/20 pt-5">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/50">
-            <Text size="xs">© 2024 Dr. Hilina Specialty Dental. All rights reserved.</Text>
+            <Text size="xs">© 2024 Dr. Hilina Specialty Dental Clinic. All rights reserved.</Text>
             <Group gap="md">
               <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
               <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>

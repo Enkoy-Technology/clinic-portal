@@ -40,7 +40,7 @@ const Header: React.FC = () => {
         <Link href="/" className="flex items-center">
           <Image
             src="/logo1.png"
-            alt="Dr. Hilina Specialty Dental"
+            alt="Dr. Hilina Specialty Dental Clinic"
             height={50}
             width={140}
             style={{ width: "auto", height: "50px" }}

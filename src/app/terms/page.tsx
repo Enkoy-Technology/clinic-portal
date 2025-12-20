@@ -37,7 +37,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Acceptance of Terms</h2>
               <p className="leading-relaxed">
-                By accessing and using the services of Dr. Hilina Specialty Dental, you agree to be
+                By accessing and using the services of Dr. Hilina Specialty Dental Clinic, you agree to be
                 bound by these Terms of Service. If you do not agree to these terms, please do not
                 use our services.
               </p>
@@ -127,7 +127,7 @@ export default function TermsPage() {
                 For questions about these Terms of Service, please contact us:
               </p>
               <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-                <p><strong>Dr. Hilina Specialty Dental</strong></p>
+                <p><strong>Dr. Hilina Specialty Dental Clinic</strong></p>
                 <p>KT Building 3rd Floor, Bole Atlas Rd</p>
                 <p>Addis Ababa, Ethiopia</p>
                 <p>Phone: +251 910 151 739</p>

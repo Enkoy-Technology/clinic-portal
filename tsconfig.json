@@ -26,8 +26,7 @@
       "@utils/*": ["src/utils/*"],
 
       "@repo/ui/*": ["src/shared/repo/ui/*"],
-      "@repo/theme/*": ["src/shared/repo/theme/*"],
-      "@repo/global-configs/*": ["src/shared/repo/global-configs/*"]
+      "@repo/theme/*": ["src/shared/repo/theme/*"]
     }
   },
   "include": [

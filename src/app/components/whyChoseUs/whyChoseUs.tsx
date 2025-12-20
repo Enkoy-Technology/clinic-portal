@@ -1,12 +1,12 @@
 "use client";
 import { Container, Grid, Paper, Stack, Text, ThemeIcon, Title } from "@mantine/core";
 import {
-  Award,
-  CalendarCheck,
-  Clock,
-  Heart,
-  Microscope,
-  Smile
+    Award,
+    CalendarCheck,
+    Clock,
+    Heart,
+    Microscope,
+    Smile
 } from "lucide-react";
 
 const features = [
@@ -50,7 +50,7 @@ const features = [
 
 export function WhyChooseUs() {
   return (
-    <section className="py-24 bg-gray-50 relative overflow-hidden">
+    <section className="py-12 md:py-16 bg-gray-50 relative overflow-hidden">
         {/* Decorative Background Blobs */}
         <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-[#19b5af]/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#19b5af]/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />

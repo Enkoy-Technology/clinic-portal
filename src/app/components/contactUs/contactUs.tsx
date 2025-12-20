@@ -1,16 +1,16 @@
 "use client";
 import {
-  Button,
-  Container,
-  Grid,
-  Group,
-  Paper,
-  Stack,
-  Text,
-  TextInput,
-  Textarea,
-  ThemeIcon,
-  Title
+    Button,
+    Container,
+    Grid,
+    Group,
+    Paper,
+    Stack,
+    Text,
+    TextInput,
+    Textarea,
+    ThemeIcon,
+    Title
 } from "@mantine/core";
 import { Clock, Mail, MapPin, Phone, Send } from "lucide-react";
 import React, { useState } from "react";
@@ -28,7 +28,7 @@ export function ContactSection() {
   };
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-12 md:py-16 bg-white relative overflow-hidden">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#19b5af]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#19b5af]/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
@@ -44,7 +44,7 @@ export function ContactSection() {
                         Get in Touch
                     </Text>
                     <Title className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-                        Dr. Hilina Specialty Dental
+                        Dr. Hilina Specialty Dental Clinic
                     </Title>
                     <Text className="text-gray-500 text-lg mt-4 leading-relaxed">
                         Have a question or need to schedule a visit? Our friendly team is here to help you.

@@ -37,7 +37,7 @@ export default function PrivacyPage() {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Introduction</h2>
               <p className="leading-relaxed">
-                Dr. Hilina Specialty Dental ("we," "our," or "us") is committed to protecting your privacy.
+                Dr. Hilina Specialty Dental Clinic ("we," "our," or "us") is committed to protecting your privacy.
                 This Privacy Policy explains how we collect, use, disclose, and safeguard your information
                 when you visit our website or use our dental services.
               </p>
@@ -100,7 +100,7 @@ export default function PrivacyPage() {
                 If you have any questions about this Privacy Policy, please contact us at:
               </p>
               <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-                <p><strong>Dr. Hilina Specialty Dental</strong></p>
+                <p><strong>Dr. Hilina Specialty Dental Clinic</strong></p>
                 <p>KT Building 3rd Floor, Bole Atlas Rd</p>
                 <p>Addis Ababa, Ethiopia</p>
                 <p>Phone: +251 910 151 739</p>

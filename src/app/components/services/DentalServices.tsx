@@ -119,7 +119,7 @@ const mobileServicesCol2 = [
 
 export const DentalServices = () => {
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white overflow-hidden">
+    <section className="py-12 md:py-16 bg-white overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
 

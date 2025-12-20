@@ -66,7 +66,7 @@ export function ExpertsSection() {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-[#F0F7FF] relative overflow-hidden">
+    <section className="py-12 md:py-16 bg-[#F0F7FF] relative overflow-hidden">
         {/* Decorative Background Elements - Smaller on mobile */}
         <div className="absolute top-0 right-0 w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] bg-[#19b5af]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] bg-[#19b5af]/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
