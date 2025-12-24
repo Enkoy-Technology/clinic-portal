@@ -1,19 +1,19 @@
 "use client";
 import {
-    Button,
-    Container,
-    Grid,
-    Group,
-    Paper,
-    Stack,
-    Text,
-    TextInput,
-    Textarea,
-    ThemeIcon,
-    Title
+  Button,
+  Container,
+  Grid,
+  Group,
+  Paper,
+  Stack,
+  Text,
+  TextInput,
+  Textarea,
+  ThemeIcon,
+  Title
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import { Clock, Mail, MapPin, Phone, Send } from "lucide-react";
+import { Clock, Mail, Phone, Send } from "lucide-react";
 import { useState } from "react";
 import { useCreatePatientWithAppointmentMutation } from "../../../shared/api/appointmentsApi";
 
@@ -160,11 +160,6 @@ export function ContactSection() {
 
                 <Stack gap="lg" mt="md">
                     <ContactItem
-                        icon={MapPin}
-                        title="Visit Us"
-                        content="KT Building 3rd Floor, Next to Washington Hotel, Bole Atlas Rd."
-                    />
-                    <ContactItem
                         icon={Phone}
                         title="Call Us"
                         content="+251 910 151 739"
@@ -196,7 +191,6 @@ export function ContactSection() {
                 </Paper>
             </Stack>
           </Grid.Col>
-
           {/* Right Column: Contact Form */}
           <Grid.Col span={{ base: 12, lg: 7 }}>
             <Paper

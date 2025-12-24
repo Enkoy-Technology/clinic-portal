@@ -100,42 +100,25 @@ export function ExpertsSection() {
                 border: '1px solid #E5E7EB',
                 color: 'black',
                 boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
-                width: 40,
-                height: 40,
+                width: 48,
+                height: 48,
                 opacity: 1,
-                '@media (min-width: 640px)': {
-                    width: 48,
-                    height: 48,
-                }
             },
             indicator: {
-                width: 6,
-                height: 6,
+                width: 8,
+                height: 8,
                 transition: 'width 250ms ease',
                 backgroundColor: '#CBD5E1',
-                '@media (min-width: 640px)': {
-                    width: 8,
-                    height: 8,
-                },
                 '&[data-active]': {
-                    width: 16,
+                    width: 24,
                     backgroundColor: '#19b5af',
-                    '@media (min-width: 640px)': {
-                        width: 24,
-                    }
                 }
             },
              indicators: {
-                bottom: -40,
-                '@media (min-width: 640px)': {
-                    bottom: -50,
-                }
+                bottom: -50,
             },
              viewport: {
-                paddingBottom: 50,
-                '@media (min-width: 640px)': {
-                    paddingBottom: 60,
-                }
+                paddingBottom: 60,
              }
           }}
         >

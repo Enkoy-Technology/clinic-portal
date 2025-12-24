@@ -4,9 +4,9 @@ import React from "react";
 import RootStyleRegistry from "./mantine";
 
 export const metadata: Metadata = {
-  title: "Dr Hilina Dental",
+  title: "Dr Hilina Speciality Dental Clinic",
   description:
-    "Dr Hilina Dental Clinic provides exceptional dental care services, including routine check-ups, advanced treatments, and personalized care to ensure your oral health and smile are at their best.",
+    "Dr Hilina Speciality Dental Clinic provides exceptional dental care services, including routine check-ups, advanced treatments, and personalized care to ensure your oral health and smile are at their best.",
 };
 export default function RootLayout({
   children,
