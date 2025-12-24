@@ -15,7 +15,6 @@ import {
 import { notifications } from "@mantine/notifications";
 import { Clock, Mail, Phone, Send } from "lucide-react";
 import { useState } from "react";
-import { useCreatePatientWithAppointmentMutation } from "../../../shared/api/appointmentsApi";
 
 const COUNTRY_CODE = "+251";
 
@@ -26,26 +25,10 @@ function normalizeETPhone(input: string) {
   return trimmed;
 }
 
-function splitName(fullName: string) {
-  const parts = fullName.trim().split(" ");
-  const firstName = parts[0] || "";
-  const lastName = parts.slice(1).join(" ") || firstName;
-  return { firstName, lastName };
-}
-
-function generatePassword() {
-  return `Temp${Math.floor(Math.random() * 10000)}!`;
-}
-
-function formatDateForAPI(date: Date) {
-  return date.toISOString().split("T")[0];
-}
-
 export function ContactSection() {
-  const [createAppointment, { isLoading }] = useCreatePatientWithAppointmentMutation();
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
-    email: "",
     phone: "",
     message: "",
   });
@@ -53,8 +36,8 @@ export function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate form (email is optional)
-    if (!formData.fullName || !formData.phone) {
+    // Validate form
+    if (!formData.fullName || !formData.phone || !formData.message) {
       notifications.show({
         title: "Missing Information",
         message: "Please fill in all required fields",
@@ -64,52 +47,29 @@ export function ContactSection() {
     }
 
     try {
-      const { firstName, lastName } = splitName(formData.fullName);
+      setIsLoading(true);
       const normalizedPhone = normalizeETPhone(formData.phone);
       const fullPhoneNumber = COUNTRY_CODE + normalizedPhone;
 
-      // Set default date to tomorrow
-      const tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1);
-
-      // Default appointment time 10:00 AM - 10:30 AM
       const payload = {
-        profile: {
-          user: {
-            email: formData.email || `temp${Date.now()}@example.com`,
-            password: generatePassword(),
-            first_name: firstName,
-            last_name: lastName,
-          },
-          role: "PATIENT",
-          phone_number: fullPhoneNumber,
-        },
-        address: {
-          city: "Addis Ababa",
-          state: "Addis Ababa",
-          street: "N/A",
-          postal_code: "1000",
-          country: 1,
-        },
-        age: 0,
-        dob: "2000-01-01",
-        gender: "MALE",
-        patient_status: "PENDING",
-        telegram_username: "",
-        note: formData.message || "",
-        profile_picture: null,
-        branch: null,
-        doctor: null,
-        service: null,
-        scheduled_date: formatDateForAPI(tomorrow),
-        start_time: "10:00:00",
-        end_time: "10:30:00",
-        appointment_status: "SCHEDULED",
-        reason: "General Consultation",
-        notes: formData.message || "",
+        name: formData.fullName.trim(),
+        phone_number: fullPhoneNumber,
+        message: formData.message.trim(),
       };
 
-      await createAppointment(payload as any).unwrap();
+      const response = await fetch("https://ff-gng8.onrender.com/api/messages/create/", {
+        method: "POST",
+        headers: {
+          "accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Failed to send message");
+      }
 
       notifications.show({
         title: 'Message Sent Successfully 🎉',
@@ -120,17 +80,18 @@ export function ContactSection() {
       // Reset form
       setFormData({
         fullName: "",
-        email: "",
         phone: "",
         message: "",
       });
     } catch (error: any) {
-      console.error("Error creating appointment:", error);
+      console.error("Error sending message:", error);
       notifications.show({
         title: "Failed to Send",
-        message: error?.data?.message || "There was an error sending your message. Please try again.",
+        message: error?.message || "There was an error sending your message. Please try again.",
         color: "red",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -217,16 +178,6 @@ export function ContactSection() {
                      />
 
                     <TextInput
-                        label="Email Address"
-                        placeholder="john@example.com"
-                        type="email"
-                        size="md"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        classNames={{ input: "bg-gray-50 border-gray-200 focus:border-[#19b5af] focus:ring-1 focus:ring-[#19b5af] transition-all" }}
-                     />
-
-                    <TextInput
                         label="Phone Number"
                         placeholder="911 234 567"
                         type="tel"
@@ -240,6 +191,7 @@ export function ContactSection() {
                     <Textarea
                         label="Message"
                         placeholder="How can we help you?"
+                        required
                         minRows={5}
                         size="md"
                         value={formData.message}

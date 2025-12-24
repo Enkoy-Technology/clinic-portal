@@ -76,7 +76,7 @@ export function Hero() {
 
       {/* Main content container */}
       <div className="w-full relative z-10 px-4 sm:px-6 lg:px-12 xl:px-32 py-8 sm:py-12">
-        <div className="mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+        <div className="mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 pl-4 sm:pl-6 md:pl-8 lg:pl-12 xl:pl-16">
 
           {/* Left Content */}
           <div className="flex-1 text-center lg:text-left">
