@@ -12,6 +12,7 @@ import {
 import { notifications } from "@mantine/notifications";
 import { User } from "lucide-react";
 import { useEffect, useState } from "react";
+import { createMessage, normalizeETPhone } from "../../../shared/api/messagesApi";
 
 interface AppointmentModalProps {
   opened: boolean;
@@ -26,16 +27,13 @@ interface AppointmentModalProps {
   } | null;
 }
 
-const COUNTRY_CODE = "+251";
-
-function normalizeETPhone(input: string) {
-  const digits = input.replace(/[^\d]/g, "");
-  const local = digits.startsWith("251") ? digits.slice(3) : digits;
-  const trimmed = local.slice(0, 9);
-  return trimmed;
-}
-
-export function AppointmentModal({ opened, onClose, hideService = false, defaultService = "", initialData = null }: AppointmentModalProps) {
+export function AppointmentModal({
+  opened,
+  onClose,
+  hideService = false,
+  defaultService = "",
+  initialData = null,
+}: AppointmentModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -76,33 +74,16 @@ export function AppointmentModal({ opened, onClose, hideService = false, default
 
     try {
       setIsLoading(true);
-      const normalizedPhone = normalizeETPhone(formData.phone);
-      const fullPhoneNumber = COUNTRY_CODE + normalizedPhone;
-
-      const payload = {
-        name: formData.name.trim(),
-        phone_number: fullPhoneNumber,
-        message: formData.message.trim(),
-      };
-
-      const response = await fetch("https://ff-gng8.onrender.com/api/messages/create/", {
-        method: "POST",
-        headers: {
-          "accept": "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+      await createMessage({
+        name: formData.name,
+        phone: formData.phone,
+        message: formData.message,
       });
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || "Failed to send message");
-      }
-
       notifications.show({
-        title: 'Message Sent Successfully 🎉',
-        message: 'We have received your message and will contact you shortly.',
-        color: 'green',
+        title: "Message Sent Successfully 🎉",
+        message: "We have received your message and will contact you shortly.",
+        color: "green",
       });
 
       onClose();
@@ -115,7 +96,9 @@ export function AppointmentModal({ opened, onClose, hideService = false, default
       console.error("Error sending message:", error);
       notifications.show({
         title: "Failed to Send",
-        message: error?.message || "There was an error sending your message. Please try again.",
+        message:
+          error?.message ||
+          "There was an error sending your message. Please try again.",
         color: "red",
       });
     } finally {
@@ -127,7 +110,11 @@ export function AppointmentModal({ opened, onClose, hideService = false, default
     <Modal
       opened={opened}
       onClose={onClose}
-      title={<Text fw={700} size="lg">Send us a Message</Text>}
+      title={
+        <Text fw={700} size="lg">
+          Send us a Message
+        </Text>
+      }
       size="lg"
       centered
       overlayProps={{
@@ -139,9 +126,9 @@ export function AppointmentModal({ opened, onClose, hideService = false, default
     >
       <form onSubmit={handleSubmit}>
         <Stack gap="md">
-            <Text size="sm" c="dimmed" mb="sm">
-                Fill out the form below and we'll get back to you shortly.
-            </Text>
+          <Text size="sm" c="dimmed" mb="sm">
+            Fill out the form below and we'll get back to you shortly.
+          </Text>
 
           <TextInput
             label="Full Name"
@@ -156,31 +143,13 @@ export function AppointmentModal({ opened, onClose, hideService = false, default
             label="Phone Number"
             placeholder="911 234 567"
             required
-            leftSection={
-              <span
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                  fontSize: 14,
-                  fontWeight: 600,
-                  color: "#495057",
-                }}
-              >
-                <span style={{ fontSize: 16 }}>🇪🇹</span>
-                {COUNTRY_CODE}
-              </span>
-            }
-            leftSectionWidth={78}
             value={normalizeETPhone(formData.phone)}
             onChange={(e) =>
-              setFormData({ ...formData, phone: normalizeETPhone(e.currentTarget.value) })
+              setFormData({
+                ...formData,
+                phone: normalizeETPhone(e.currentTarget.value),
+              })
             }
-            styles={{
-              input: {
-                paddingLeft: 84,
-              },
-            }}
           />
 
           <Textarea
@@ -189,7 +158,9 @@ export function AppointmentModal({ opened, onClose, hideService = false, default
             required
             minRows={5}
             value={formData.message}
-            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, message: e.target.value })
+            }
           />
 
           <Group justify="flex-end" mt="md">
@@ -197,10 +168,10 @@ export function AppointmentModal({ opened, onClose, hideService = false, default
               Cancel
             </Button>
             <Button
-                type="submit"
-                loading={isLoading}
-                className="bg-[#19b5af] hover:bg-[#14918c] transition-colors text-white font-semibold"
-                size="md"
+              type="submit"
+              loading={isLoading}
+              className="bg-[#19b5af] hover:bg-[#14918c] transition-colors text-white font-semibold"
+              size="md"
             >
               Send Message
             </Button>
