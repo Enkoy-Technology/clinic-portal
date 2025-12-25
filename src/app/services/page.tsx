@@ -13,54 +13,96 @@ const services = [
     icon: "🦷",
     title: "Orthodontics",
     subtitle: "Braces & Aligners",
-    description: "Achieve perfectly aligned teeth with our high-quality braces and clear aligners. Our comprehensive orthodontic treatments include traditional braces, clear aligners, and retainers, all customized to fit your unique needs and lifestyle.",
-    features: ["10+ Years Experience", "Personalized Treatment Plans", "Clear Aligners Available", "Regular Progress Monitoring"],
-    image: "https://images.unsplash.com/photo-1677026010083-78ec7f1b84ed?auto=format&fit=crop&q=80&w=800",
+    description:
+      "Achieve perfectly aligned teeth with our high-quality braces and clear aligners. Our comprehensive orthodontic treatments include traditional braces, clear aligners, and retainers, all customized to fit your unique needs and lifestyle.",
+    features: [
+      "10+ Years Experience",
+      "Personalized Treatment Plans",
+      "Clear Aligners Available",
+      "Regular Progress Monitoring",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1677026010083-78ec7f1b84ed?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: 2,
     icon: "👑",
     title: "Zirconia Crowns",
     subtitle: "Premium Restorations",
-    description: "The gold standard in dental restorations for durability and natural appearance. Our zirconia crowns offer superior strength, biocompatibility, and aesthetics, providing a perfect balance between function and beauty.",
-    features: ["Superior Strength", "Natural Look", "Long-Lasting", "Biocompatible Material"],
-    image: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&q=80&w=800",
+    description:
+      "The gold standard in dental restorations for durability and natural appearance. Our zirconia crowns offer superior strength, biocompatibility, and aesthetics, providing a perfect balance between function and beauty.",
+    features: [
+      "Superior Strength",
+      "Natural Look",
+      "Long-Lasting",
+      "Biocompatible Material",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: 3,
     icon: "💉",
     title: "Root Canal",
     subtitle: "Pain-Free Treatment",
-    description: "Save damaged teeth with our gentle, modern root canal therapy. Using the latest technology and techniques, we ensure a comfortable, pain-free experience while preserving your natural tooth structure.",
-    features: ["Latest Technology", "Pain-Free Procedure", "Tooth Preservation", "Expert Care"],
-    image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=800",
+    description:
+      "Save damaged teeth with our gentle, modern root canal therapy. Using the latest technology and techniques, we ensure a comfortable, pain-free experience while preserving your natural tooth structure.",
+    features: [
+      "Latest Technology",
+      "Pain-Free Procedure",
+      "Tooth Preservation",
+      "Expert Care",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: 4,
     icon: "🔍",
     title: "General Dentistry",
     subtitle: "Complete Oral Care",
-    description: "Routine checkups, cleanings, and preventive treatments for optimal health. Our comprehensive general dentistry services help maintain your oral health and prevent future dental problems through regular care.",
-    features: ["Regular Checkups", "Professional Cleanings", "Preventive Care", "Oral Health Education"],
-    image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=800",
+    description:
+      "Routine checkups, cleanings, and preventive treatments for optimal health. Our comprehensive general dentistry services help maintain your oral health and prevent future dental problems through regular care.",
+    features: [
+      "Regular Checkups",
+      "Professional Cleanings",
+      "Preventive Care",
+      "Oral Health Education",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: 5,
     icon: "✨",
     title: "Cosmetic Dentistry",
     subtitle: "Smile Makeovers",
-    description: "Enhance your smile with whitening, veneers, and complete makeovers. Transform your smile with our advanced cosmetic procedures designed to boost your confidence and improve your appearance.",
-    features: ["Teeth Whitening", "Porcelain Veneers", "Smile Design", "Aesthetic Consultations"],
-    image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800",
+    description:
+      "Enhance your smile with whitening, veneers, and complete makeovers. Transform your smile with our advanced cosmetic procedures designed to boost your confidence and improve your appearance.",
+    features: [
+      "Teeth Whitening",
+      "Porcelain Veneers",
+      "Smile Design",
+      "Aesthetic Consultations",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: 6,
     icon: "👶",
     title: "Pediatric Dentistry",
     subtitle: "Kids Dental Care",
-    description: "Gentle, fun dental care designed specifically for children. Our pediatric dental team creates a positive, comfortable environment to ensure your child's dental visits are stress-free and enjoyable.",
-    features: ["Kid-Friendly Environment", "Preventive Focus", "Positive Experience", "Early Intervention"],
-    image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=800",
+    description:
+      "Gentle, fun dental care designed specifically for children. Our pediatric dental team creates a positive, comfortable environment to ensure your child's dental visits are stress-free and enjoyable.",
+    features: [
+      "Kid-Friendly Environment",
+      "Preventive Focus",
+      "Positive Experience",
+      "Early Intervention",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=800",
   },
 ];
 
@@ -91,13 +133,16 @@ function ServicesPage() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#19b5af]/10 rounded-full mb-6">
               <Sparkles size={18} className="text-[#19b5af]" />
-              <span className="text-[#19b5af] font-semibold text-sm">Our Services</span>
+              <span className="text-[#19b5af] font-semibold text-sm">
+                Our Services
+              </span>
             </div>
             <Title className="text-4xl md:text-6xl font-black text-gray-900 mb-6">
               Expert Dental <span className="text-[#19b5af]">Services</span>
             </Title>
             <Text className="text-xl text-gray-500 max-w-2xl mx-auto">
-              Professional specialty dental care with over 5+ years of experience. Your smile is our priority.
+              Professional specialty dental care with over 5+ years of
+              experience. Your smile is our priority.
             </Text>
           </motion.div>
         </Container>
@@ -119,7 +164,11 @@ function ServicesPage() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="mb-20 md:mb-32 last:mb-0"
               >
-                <Grid gutter={{ base: "xl", md: "xl" }} align="center" className="items-center">
+                <Grid
+                  gutter={{ base: "xl", md: "xl" }}
+                  align="center"
+                  className="items-center"
+                >
                   {/* Image Column */}
                   <Grid.Col
                     span={{ base: 12, md: 6 }}
@@ -202,9 +251,14 @@ function ServicesPage() {
                         {service.features.map((feature, idx) => (
                           <div key={idx} className="flex items-center gap-3">
                             <div className="w-6 h-6 rounded-full bg-[#19b5af]/10 flex items-center justify-center flex-shrink-0">
-                              <CheckCircle size={16} className="text-[#19b5af]" />
+                              <CheckCircle
+                                size={16}
+                                className="text-[#19b5af]"
+                              />
                             </div>
-                            <Text className="text-gray-700 font-medium">{feature}</Text>
+                            <Text className="text-gray-700 font-medium">
+                              {feature}
+                            </Text>
                           </div>
                         ))}
                       </motion.div>
@@ -225,7 +279,10 @@ function ServicesPage() {
                           className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#19b5af] to-[#14918c] hover:from-[#14918c] hover:to-[#19b5af] text-white rounded-full font-bold text-base md:text-lg shadow-xl shadow-[#19b5af]/30 transition-all duration-300"
                         >
                           <span>Contact Us - Walk-ins Welcome</span>
-                          <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                          <ArrowRight
+                            size={20}
+                            className="group-hover:translate-x-1 transition-transform"
+                          />
                         </motion.button>
                       </motion.div>
                     </div>
@@ -259,7 +316,8 @@ function ServicesPage() {
                 Ready For Your Best Smile?
               </Title>
               <Text className="text-lg text-white/80 mb-8 max-w-md mx-auto">
-                Walk-ins welcome! Contact us today and let us take care of your dental health
+                Walk-ins welcome! Contact us today and let us take care of your
+                dental health
               </Text>
               <motion.button
                 type="button"
@@ -276,7 +334,11 @@ function ServicesPage() {
         </Container>
       </Box>
 
-      <AppointmentModal opened={opened} onClose={close} defaultService={selectedService} />
+      <AppointmentModal
+        opened={opened}
+        onClose={close}
+        defaultService={selectedService}
+      />
     </Box>
   );
 }
