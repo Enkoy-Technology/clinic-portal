@@ -15,7 +15,7 @@ import {
 
 const TopHeader: React.FC = () => {
   return (
-    <div className="bg-[var(--mantine-color-primary-7)] p-2">
+    <div className="bg-[var(--mantine-color-primary-7)] py-1.5 px-4">
       <Group justify="space-between" className="max-w-screen-xl mx-auto">
         {/* Left End - Contact Info */}
         <Group gap="sm">

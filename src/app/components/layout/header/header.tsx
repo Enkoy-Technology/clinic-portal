@@ -17,12 +17,12 @@ const Header: React.FC = () => {
   return (
     <AppShell.Header
       withBorder={false}
-      className="sticky top-0 z-50 h-[80px] bg-gradient-to-r from-[#F2FAFB] via-[#F0F9FA] to-[#E8F6F8]"
+      className="sticky top-0 z-50 h-[60px] bg-gradient-to-r from-[#F2FAFB] via-[#F0F9FA] to-[#E8F6F8]"
       style={{
         position: "sticky",
         top: 0,
         zIndex: 100,
-        height: 80
+        height: 60
       }}
     >
       <Box className="h-full px-6 lg:px-12 flex items-center justify-between max-w-[1600px] mx-auto">
@@ -32,9 +32,9 @@ const Header: React.FC = () => {
           <Image
             src="/logo1.png"
             alt="Dr. Hilina Specialty Dental Clinic"
-            height={50}
-            width={140}
-            style={{ width: "auto", height: "50px" }}
+            height={40}
+            width={120}
+            style={{ width: "auto", height: "40px" }}
             className="object-contain"
             priority
           />
