@@ -84,9 +84,100 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
+              className="relative"
             >
               <Title className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-gray-900 leading-[1.1] mb-6 tracking-tight">
-                Your Perfect<br className="hidden sm:block" /> Smile Begins Here
+                Your Perfect<br className="hidden sm:block" />{" "}
+                <span className="relative inline-block">
+                  <span
+                    className="inline-block relative"
+                    style={{
+                      background: 'linear-gradient(135deg, #19b5af, #33C1B7, #14918c)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    Smile
+                  </span>
+                  {/* Spark at the top of letter E */}
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={prefersReducedMotion ? { opacity: 1, scale: 1 } : {
+                      opacity: [0.8, 1, 0.8],
+                      scale: [0.95, 1.15, 0.95],
+                      rotate: [0, 20, -20, 0],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    className="absolute pointer-events-none"
+                    style={{
+                      top: '-10px',
+                      right: '0px',
+                    }}
+                  >
+                    {/* Glow effect behind spark */}
+                    <motion.div
+                      animate={prefersReducedMotion ? {} : {
+                        opacity: [0.5, 1, 0.5],
+                        scale: [1, 1.3, 1],
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="absolute inset-0 -z-10 rounded-full"
+                      style={{
+                        background: 'radial-gradient(circle, rgba(25, 181, 175, 0.6), transparent)',
+                        filter: 'blur(8px)',
+                        transform: 'scale(1.5)',
+                      }}
+                    />
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      className="text-cyan-400"
+                      style={{
+                        filter: 'drop-shadow(0 0 8px rgba(25, 181, 175, 1)) drop-shadow(0 0 4px rgba(255, 255, 255, 0.8))',
+                      }}
+                    >
+                      <path
+                        d="M12 2L13.5 8.5L20 10L13.5 11.5L12 18L10.5 11.5L4 10L10.5 8.5L12 2Z"
+                        fill="currentColor"
+                        opacity="1"
+                      />
+                      <path
+                        d="M12 6L12.5 9L15.5 9.5L12.5 10L12 13L11.5 10L8.5 9.5L11.5 9L12 6Z"
+                        fill="white"
+                        opacity="0.9"
+                      />
+                    </svg>
+                    {/* Shimmer effect */}
+                    <motion.div
+                      animate={prefersReducedMotion ? {} : {
+                        opacity: [0, 1, 0],
+                        scale: [0.8, 1.2, 0.8],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="absolute inset-0 rounded-full"
+                      style={{
+                        background: 'radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent)',
+                        filter: 'blur(4px)',
+                      }}
+                    />
+                  </motion.span>
+                </span>{" "}
+                Begins Here
               </Title>
             </motion.div>
 
