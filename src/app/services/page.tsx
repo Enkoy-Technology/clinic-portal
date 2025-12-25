@@ -108,7 +108,7 @@ function ServicesPage() {
               Expert Dental <span className="text-[#19b5af]">Services</span>
             </Title>
             <Text className="text-xl text-gray-500 max-w-2xl mx-auto">
-              Professional specialty dental care with over 10 years of experience. Your smile is our priority.
+              Professional specialty dental care with over 5+ years of experience. Your smile is our priority.
             </Text>
           </motion.div>
         </Container>
