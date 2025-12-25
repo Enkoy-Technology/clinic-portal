@@ -39,7 +39,7 @@ export function Story() {
         <Box className="relative pb-[56.25%] h-0 overflow-hidden rounded-lg">
           <iframe
             className="absolute top-0 left-0 w-full h-full rounded-lg"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ" //TODO: Add the correct video URL
+            src="https://www.youtube.com/shorts/hAax2o-0UoA"
             title="Video"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -61,7 +61,7 @@ export function Story() {
               transition={{ duration: 0.8 }}
             >
               <Image
-                src={"docs.jpg"}
+                src={"docs1.jpeg"}
                 radius="lg"
                 className="rounded-lg w-full h-[420px] sm:h-[480px] md:h-[540px] lg:h-[600px] object-cover border-4 border-white shadow-lg"
                 alt="Doctor Image"
@@ -80,7 +80,7 @@ export function Story() {
               transition={{ delay: 0.5, duration: 0.7 }}
             >
               <Image
-                src={"odontologia.jpg"}
+                src={"story2.jpg"}
                 radius="lg"
                 className="rounded-lg w-[140px] h-[140px] sm:w-[180px] sm:h-[180px] md:w-[200px] md:h-[200px] object-cover border-6 sm:border-8 border-white shadow-xl"
                 alt="Dental Image"
