@@ -1,7 +1,8 @@
 "use client";
 
+import { Text } from "@mantine/core";
 import { motion } from "framer-motion";
-import { ArrowUpRight, ClipboardList, Heart, Sparkles } from "lucide-react";
+import { ArrowUpRight, Heart, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -231,53 +232,70 @@ export const DentalServices = () => {
               viewport={{ once: true }}
               variants={fadeIn}
             >
-               {/* Icons Row */}
-               <div className="flex gap-4 sm:gap-6 mb-6 sm:mb-8 justify-center lg:justify-start">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#19b5af]/10 flex items-center justify-center text-[#19b5af]">
-                     <ClipboardList size={24} className="sm:w-8 sm:h-8" strokeWidth={1.5} />
-                  </div>
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#19b5af]/10 flex items-center justify-center text-[#19b5af]">
-                     <svg width="24" height="24" className="sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M12 2C7 2 7 9 7 9s0 1 1 1h8s1 0 1-1c0 0 0-7-5-7z"/>
-                        <path d="M9 10v4"/>
-                        <path d="M15 10v4"/>
-                        <path d="M12 14v8"/>
-                        <path d="M9 18h6"/>
-                     </svg>
-                  </div>
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#19b5af]/10 flex items-center justify-center text-[#19b5af]">
-                     <svg width="24" height="24" className="sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
-                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
-                        <path d="M4 22h16"/>
-                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
-                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
-                        <path d="M18 2h-6c-1.1 0-2 .9-2 2v8.4c0 1.55 1.57 2.6 3 2.6h2c1.43 0 3-1.05 3-2.6V4c0-1.1-.9-2-2-2z"/>
-                     </svg>
-                  </div>
-               </div>
-
-               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
-                 Dental Care Services
+               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-4 sm:mb-6 leading-tight">
+                 Our Comprehensive{" "}
+                 <span
+                   className="relative inline-block"
+                   style={{
+                     background: 'linear-gradient(135deg, #19b5af, #33C1B7, #14918c)',
+                     WebkitBackgroundClip: 'text',
+                     WebkitTextFillColor: 'transparent',
+                     backgroundClip: 'text',
+                   }}
+                 >
+                   Dental Services
+                 </span>
                </h2>
 
-               <p className="text-gray-600 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 lg:mb-10">
-                 Trust us to enhance your smile and overall oral health through our commitment to delivering high-quality dental services. Your satisfaction and well-being are our foremost priorities, making us your preferred choice for exceptional dental care.
+               <p className="text-gray-600 text-base sm:text-lg lg:text-xl leading-relaxed mb-6 sm:mb-8">
+                 Dr. Hilina Specialty Dental Clinic offers a comprehensive range of services, each delivered with the highest level of care and precision. From routine check-ups to advanced procedures, our team is dedicated to maintaining and enhancing your oral health.
                </p>
+
+               {/* Service Categories */}
+               <div className="space-y-4 mb-8">
+                 <div className="flex items-start gap-3 p-4 bg-gradient-to-r from-[#19b5af]/5 to-transparent rounded-xl border border-[#19b5af]/10">
+                   <div className="w-2 h-2 rounded-full bg-[#19b5af] mt-2 flex-shrink-0" />
+                   <div>
+                     <Text className="font-bold text-gray-900 mb-1">Diagnostic Services</Text>
+                     <Text className="text-sm text-gray-600">Intraoral X-Ray, Panoramic X-Ray, CBCT (3D X-Ray), Medical Card</Text>
+                   </div>
+                 </div>
+
+                 <div className="flex items-start gap-3 p-4 bg-gradient-to-r from-[#19b5af]/5 to-transparent rounded-xl border border-[#19b5af]/10">
+                   <div className="w-2 h-2 rounded-full bg-[#19b5af] mt-2 flex-shrink-0" />
+                   <div>
+                     <Text className="font-bold text-gray-900 mb-1">Restorative Dentistry</Text>
+                     <Text className="text-sm text-gray-600">Composite/Amalgam Fillings, Porcelain & Zirconia Crowns, Flexible Dentures</Text>
+                   </div>
+                 </div>
+
+                 <div className="flex items-start gap-3 p-4 bg-gradient-to-r from-[#19b5af]/5 to-transparent rounded-xl border border-[#19b5af]/10">
+                   <div className="w-2 h-2 rounded-full bg-[#19b5af] mt-2 flex-shrink-0" />
+                   <div>
+                     <Text className="font-bold text-gray-900 mb-1">Cosmetic & Orthodontics</Text>
+                     <Text className="text-sm text-gray-600">Teeth Whitening, Veneers, Braces, Clear Aligners</Text>
+                   </div>
+                 </div>
+
+                 <div className="flex items-start gap-3 p-4 bg-gradient-to-r from-[#19b5af]/5 to-transparent rounded-xl border border-[#19b5af]/10">
+                   <div className="w-2 h-2 rounded-full bg-[#19b5af] mt-2 flex-shrink-0" />
+                   <div>
+                     <Text className="font-bold text-gray-900 mb-1">Advanced Procedures</Text>
+                     <Text className="text-sm text-gray-600">Dental Implants, Root Canal Treatment, Bone Graft, Surgical Extractions</Text>
+                   </div>
+                 </div>
+               </div>
 
                <div className="flex justify-center lg:justify-start">
                  <Link href="/services">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="group pl-6 sm:pl-8 pr-2 py-2 bg-[#19b5af] hover:bg-[#14918c] text-white rounded-full font-bold text-sm sm:text-base lg:text-lg shadow-lg shadow-[#19b5af]/30 transition-all flex items-center gap-2 sm:gap-4"
+                      className="group pl-6 sm:pl-8 pr-2 py-3 bg-gradient-to-r from-[#19b5af] to-[#14918c] hover:from-[#14918c] hover:to-[#19b5af] text-white rounded-full font-bold text-base sm:text-lg shadow-xl shadow-[#19b5af]/40 transition-all flex items-center gap-3 sm:gap-4"
                     >
-                      <span>More Details</span>
+                      <span>Explore All Services</span>
                       <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center text-[#19b5af] group-hover:rotate-12 transition-transform duration-300 relative">
-                         <svg width="20" height="20" className="sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M7 2c-2 0-3 2.5-3 5 0 3.5 1.5 6 3 6 1.5 0 2-1 2-1s.5 1 2 1c1.5 1.5 3 2 4.5.5C17 12 17 9 17 5c0-3-2-3-4-3-1.5 0-2.5 1-3.5 2C8.5 3 8 2 7 2zm.5 18c-2 0-3-1-3-3l-.5-3c1.5 1.5 3 .5 4-1 .5 1.5 1.5 3 3.5 3 .5 0 1-.5 1.5-1l-.5 5c0 1.5-3 1.5-5 0z" />
-                            <path d="M14 13.5c-1.5 1.5-3 2.5-4.5 1C8 13.5 8 13 7.5 13c-2 3-1 6 1 7.5 2 1.5 5 1.5 7 0 2-1.5 3-4.5 1-7.5-.5 0-.5.5-1.5.5z" opacity="0.5"/>
-                         </svg>
+                         <ArrowUpRight size={20} className="sm:w-6 sm:h-6" />
                          <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 text-yellow-400">
                             <Sparkles size={10} className="sm:w-3 sm:h-3" fill="currentColor" />
                          </div>
