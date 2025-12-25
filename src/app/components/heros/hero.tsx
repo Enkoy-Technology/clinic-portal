@@ -5,7 +5,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { useMemo } from "react";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Facebook, Instagram, Star, Twitter } from "lucide-react";
+import { ArrowRight, Facebook, Instagram, Star } from "lucide-react";
 import { AppointmentModal } from "../appointment/AppointmentModal";
 
 // TikTok Icon Component
@@ -263,28 +263,38 @@ export function Hero() {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="flex items-center justify-center lg:justify-start gap-4"
               >
-                {[
-                  { icon: Facebook, color: "#1877F2", label: "facebook" },
-                  { icon: Twitter, color: "#1DA1F2", label: "twitter" },
-                  { icon: Instagram, color: "#E1306C", label: "instagram" },
-                ].map((social, i) => (
-                  <motion.button
-                    key={i}
-                    whileHover={{ y: -5 }}
-                    className="w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-100"
-                    style={{ color: social.color }}
-                    aria-label={`Visit our ${social.label}`}
-                  >
-                    <social.icon size={20} strokeWidth={2} />
-                  </motion.button>
-                ))}
-                <motion.button
+                <motion.a
+                  href="https://www.facebook.com/HilinaDental"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -5 }}
+                  className="w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-100"
+                  style={{ color: "#1877F2" }}
+                  aria-label="Visit our Facebook"
+                >
+                  <Facebook size={20} strokeWidth={2} />
+                </motion.a>
+                <motion.a
+                  href="https://www.instagram.com/drhilinadental/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -5 }}
+                  className="w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-100"
+                  style={{ color: "#E1306C" }}
+                  aria-label="Visit our Instagram"
+                >
+                  <Instagram size={20} strokeWidth={2} />
+                </motion.a>
+                <motion.a
+                  href="https://www.tiktok.com/@drhilina_dentalclinic"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ y: -5 }}
                   className="w-11 h-11 bg-white rounded-full flex items-center justify-center text-black shadow-sm border border-gray-100"
-                  aria-label="Visit our tiktok"
+                  aria-label="Visit our TikTok"
                 >
                   <TikTokIcon size={20} />
-                </motion.button>
+                </motion.a>
               </motion.div>
             </div>
 

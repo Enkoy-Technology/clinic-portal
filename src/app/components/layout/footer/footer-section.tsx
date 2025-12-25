@@ -12,7 +12,6 @@ import {
   Mail,
   MapPin,
   Phone,
-  Twitter
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -57,6 +56,10 @@ export function FooterSection() {
             </Text>
             <Group gap="xs">
               <ActionIcon
+                component="a"
+                href="https://www.facebook.com/HilinaDental"
+                target="_blank"
+                rel="noopener noreferrer"
                 variant="subtle"
                 size="lg"
                 className="bg-white text-[#1877F2] hover:brightness-110 transition-all duration-300 shadow-sm rounded-full"
@@ -65,14 +68,10 @@ export function FooterSection() {
                 <Facebook size={18} strokeWidth={2} />
               </ActionIcon>
               <ActionIcon
-                variant="subtle"
-                size="lg"
-                className="bg-white text-[#1DA1F2] hover:brightness-110 transition-all duration-300 shadow-sm rounded-full"
-                aria-label="Twitter"
-              >
-                <Twitter size={18} strokeWidth={2} />
-              </ActionIcon>
-              <ActionIcon
+                component="a"
+                href="https://www.instagram.com/drhilinadental/"
+                target="_blank"
+                rel="noopener noreferrer"
                 variant="subtle"
                 size="lg"
                 className="bg-white text-[#E1306C] hover:brightness-110 transition-all duration-300 shadow-sm rounded-full"
@@ -81,6 +80,10 @@ export function FooterSection() {
                 <Instagram size={18} strokeWidth={2} />
               </ActionIcon>
               <ActionIcon
+                component="a"
+                href="https://www.tiktok.com/@drhilina_dentalclinic"
+                target="_blank"
+                rel="noopener noreferrer"
                 variant="subtle"
                 size="lg"
                 className="bg-white text-[#000000] hover:brightness-90 transition-all duration-300 shadow-sm rounded-full"
