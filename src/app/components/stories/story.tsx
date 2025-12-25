@@ -100,20 +100,30 @@ export function Story() {
                 OUR STORY
               </Text>
               <Title className="text-gray-900 text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold leading-tight">
-                Advanced Dental Care <br className="hidden sm:block" /> Tailored Just for You.
+                A Tradition of Value, <br className="hidden sm:block" /> A Promise of Excellence
               </Title>
-              <Text className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                At our clinic, we're redefining dental care with a focus on
-                advanced techniques and personalized treatment. Led by Dr.
-                Hilina, our team is committed to ensuring every patient receives
-                exceptional care in a comfortable, welcoming environment.
+
+              <Text className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                Dr. Hilina Specialty Dental Clinic is a unique dental practice in Ethiopia with a team of certified professional doctors, dental hygienists, assistants, and dental technicians. We have a passion for the science and art of dentistry.
               </Text>
-              <Text className="italic text-gray-500 text-sm sm:text-base border-l-4 border-[#19b5af] pl-4 py-2">
-                "We offer reasonable pricing health care plans, insurance
-                packages to clients insurance packages to clients"
+
+              <Text className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                Our team is highly competent and committed to giving the best, most up-to-date, and friendly dental healthcare there is. We treat all our clients with the utmost respect, courtesy, professionalism, honesty, and confidentiality.
+              </Text>
+
+              <Text className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                Dr. Hilina Specialty Dental Clinic, a pioneer of dentistry service in Ethiopia, was founded by Dr. Hilina. The founder and CEO of the clinic is a well-renowned and qualified professional of dental treatment who has abundant skill, knowledge, and extensive experience in the field. She had a vision and a sacred mission on how she wanted to build up her dental practice to the highest standard that it is now.
+              </Text>
+
+              <Text className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                She set up the practice under her strict guidelines and values to provide the best dental services in Ethiopia. She slowly and steadily developed a team of specialist dentists who shared her vision and values.
+              </Text>
+
+              <Text className="italic text-gray-600 text-sm sm:text-base border-l-4 border-[#19b5af] pl-4 py-3 bg-[#19b5af]/5 rounded-r-lg my-4">
+                "We believe in building long-term relationships with our patients, fostering an environment of trust, compassion, and exceptional service. Every smile we create is a testament to our commitment to excellence."
               </Text>
               <Text className="text-[#19b5af] font-bold text-sm sm:text-base">
-                Dr. Hilina, Chief Doctor
+                — Dr. Hilina, Founder & Chief Doctor
               </Text>
 
               <Box className="flex flex-col sm:flex-row justify-start items-start sm:items-center gap-3 sm:gap-4 pt-4 w-full sm:w-auto">

@@ -17,7 +17,7 @@ export default function Home() {
       <DentalServices />
       {/* <ServiceNew /> */}
       <FreeConsultation />
-      <ExpertsSection />
+      {/* <ExpertsSection /> */}
       <WhyChooseUs />
       <Testimonials />
       <ContactSection />
