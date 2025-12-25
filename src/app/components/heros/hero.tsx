@@ -2,6 +2,7 @@
 
 import { Box, Image, Text, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { useMemo } from "react";
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Facebook, Instagram, Star, Twitter } from "lucide-react";
@@ -44,9 +45,25 @@ const staggerContainer = {
   }
 };
 
+// Array of available hero images
+const heroImages = [
+  "/hero/hero.jpeg",
+  "/hero/hero1.jpg",
+  "/hero/hero2.jpg",
+  "/hero/hero3.jpg",
+  "/hero/hero4.jpg",
+  "/hero/hero5.jpg",
+];
+
 export function Hero() {
   const [opened, { open, close }] = useDisclosure(false);
   const prefersReducedMotion = useReducedMotion();
+
+  // Randomly select a hero image on component mount
+  const randomHeroImage = useMemo(() => {
+    const randomIndex = Math.floor(Math.random() * heroImages.length);
+    return heroImages[randomIndex];
+  }, []);
 
   return (
     <Box className="relative w-full h-screen max-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#F2FAFB] via-[#F0F9FA] to-[#E8F6F8] font-sans" style={{ height: '100vh' }}>
@@ -312,7 +329,7 @@ export function Hero() {
                   <div className="w-full h-full rounded-3xl overflow-hidden bg-white/10 backdrop-blur-sm">
                     {/* Main Hero Image */}
                     <Image
-                      src="/hero/hero.jpeg"
+                      src={randomHeroImage}
                       alt="Professional dental care - Patient and dentist"
                       className="w-full h-full object-cover rounded-3xl"
                     />
@@ -334,27 +351,6 @@ export function Hero() {
 
                 {/* Overlay gradient for better text contrast */}
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
-
-                {/* Floating decorative elements */}
-                <motion.div
-                  animate={prefersReducedMotion ? {} : {
-                    y: [10, -10, 10],
-                    rotate: [5, -5, 5],
-                  }}
-                  transition={{
-                    duration: 7,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1,
-                  }}
-                  className="absolute bottom-20 right-12 hidden lg:block z-10"
-                >
-                  <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 shadow-lg">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" className="text-teal-500">
-                      <path d="M12 2L13.5 8.5L20 10L13.5 11.5L12 18L10.5 11.5L4 10L10.5 8.5L12 2Z" fill="currentColor" opacity="0.8" />
-                    </svg>
-                  </div>
-                </motion.div>
 
                 {/* Rating Badge */}
                 <motion.div
