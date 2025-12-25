@@ -34,15 +34,23 @@ const TestimonialCard = ({
           <div className="relative flex-shrink-0">
              <div className="absolute inset-0 bg-[#19b5af] rounded-full blur-xl opacity-10" />
              <Avatar
-              src={image}
+              src={image || undefined}
               size={110}
               radius="100%"
               alt={name}
-              className="border-4 border-white shadow-xl relative z-10"
+              className="border-4 border-white shadow-xl relative z-10 bg-gradient-to-br from-[#19b5af] to-[#14918c]"
               styles={{
-                root: { border: '4px solid #f0fdfa' }
+                root: { border: '4px solid #f0fdfa' },
+                placeholder: {
+                  backgroundColor: 'transparent',
+                  color: 'white',
+                  fontSize: '48px',
+                  fontWeight: 800,
+                }
               }}
-            />
+            >
+              {!image && name.charAt(0).toUpperCase()}
+            </Avatar>
              <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-[#19b5af] rounded-full flex items-center justify-center text-white shadow-lg border-2 border-white z-20">
                 <Quote size={18} fill="currentColor" stroke="none" />
              </div>
@@ -64,9 +72,11 @@ const TestimonialCard = ({
               <Text fw={800} className="text-gray-900 text-xl tracking-tight leading-none mb-1">
                 {name}
               </Text>
-              <Text size="sm" className="text-[#19b5af] font-bold uppercase tracking-widest text-xs">
-                {role}
-              </Text>
+              {role && (
+                <Text size="sm" className="text-[#19b5af] font-bold uppercase tracking-widest text-xs">
+                  {role}
+                </Text>
+              )}
             </div>
           </div>
         </div>
@@ -104,39 +114,11 @@ export function Testimonials() {
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
-      role: "Orthodontics",
+      name: "Getahun H",
+      role: "",
       content:
-        "The clear aligners treatment was seamless! I can't believe how much my smile has improved in just 6 months. The team was incredibly supportive throughout.",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200",
-    },
-    {
-      name: "Michael Chen",
-      role: "Dental Implants",
-      content:
-        "I was nervous about getting an implant, but Dr. Hilina made me feel completely at ease. The procedure was painless and the results are natural-looking.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
-    },
-    {
-      name: "Emily Davis",
-      role: "Teeth Whitening",
-      content:
-        "Best dental experience I've ever had. The teeth whitening results exceeded my expectations. The clinic is modern, clean, and the staff are true professionals.",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200",
-    },
-    {
-      name: "David Wilson",
-      role: "Regular Patient",
-      content:
-        "Finally found a dentist I actually look forward to visiting. Gentle care, transparent pricing, and a friendly atmosphere. My whole family comes here now.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
-    },
-    {
-      name: "Jessica Lee",
-      role: "Cosmetic Dentistry",
-      content:
-        "They completely transformed my smile with veneers. I have so much more confidence now. The attention to detail and care was truly impressive.",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200",
+        "Big thanks to Dr. Hilena for the excellent care. From the first visit, she made everything comfortable and stress-free. She's very skilled, attentive, and respectful, and the results exceeded my expectations. I'll definitely come back and recommend her to others.",
+      image: "",
     },
   ];
 
@@ -161,12 +143,12 @@ export function Testimonials() {
         </Stack>
 
         <Carousel
-          loop
+          loop={false}
           slideSize={{ base: "100%", md: "100%" }}
           slideGap={{ base: "xl", md: "3rem" }}
           align="start"
           slidesToScroll={1}
-          plugins={[autoplay.current]}
+          plugins={[]}
           styles={{
             root: {
               overflow: 'visible'
