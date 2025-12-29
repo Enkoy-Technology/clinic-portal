@@ -2,7 +2,7 @@
 
 import { Box, Image, Text, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Facebook, Instagram, Star } from "lucide-react";
@@ -58,11 +58,12 @@ const heroImages = [
 export function Hero() {
   const [opened, { open, close }] = useDisclosure(false);
   const prefersReducedMotion = useReducedMotion();
+  const [randomHeroImage, setRandomHeroImage] = useState<string>(heroImages[0] || "/hero/hero.jpeg");
 
-  // Randomly select a hero image on component mount
-  const randomHeroImage = useMemo(() => {
+  // Randomly select a hero image on client-side mount only
+  useEffect(() => {
     const randomIndex = Math.floor(Math.random() * heroImages.length);
-    return heroImages[randomIndex];
+    setRandomHeroImage(heroImages[randomIndex] || "/hero/hero.jpeg");
   }, []);
 
   return (
