@@ -1,10 +1,12 @@
 "use client";
 
-import { Box, Button, Container, Text, Textarea, TextInput, Title } from "@mantine/core";
+import { Box, Button, Container, Rating, Text, Textarea, TextInput, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 import { motion } from "framer-motion";
-import { CheckCircle, Send } from "lucide-react";
+import { CheckCircle, Send, Star } from "lucide-react";
 import { useState } from "react";
+import { createFeedback } from "../../shared/api/feedbackApi";
 
 export default function FeedbackPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -14,25 +16,39 @@ export default function FeedbackPage() {
     initialValues: {
       name: "",
       message: "",
+      star: 5,
     },
     validate: {
       name: (value) => (value.trim().length < 2 ? "Name must be at least 2 characters" : null),
       message: (value) => (value.trim().length < 10 ? "Message must be at least 10 characters" : null),
+      star: (value) => (value < 1 || value > 5 ? "Please select a rating" : null),
     },
   });
 
   const handleSubmit = async (values: typeof form.values) => {
     setLoading(true);
     try {
-      // Here you can add API call to submit feedback
-      // For now, we'll just simulate a delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await createFeedback({
+        fullname: values.name,
+        feedback: values.message,
+        star: values.star,
+      });
 
-      console.log("Feedback submitted:", values);
+      notifications.show({
+        title: "Feedback Submitted Successfully 🎉",
+        message: "Thank you for your feedback! We appreciate your input.",
+        color: "green",
+      });
+
       setSubmitted(true);
       form.reset();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error submitting feedback:", error);
+      notifications.show({
+        title: "Failed to Submit",
+        message: error?.message || "There was an error submitting your feedback. Please try again.",
+        color: "red",
+      });
     } finally {
       setLoading(false);
     }
@@ -136,6 +152,24 @@ export default function FeedbackPage() {
                       input: "border-gray-200 focus:border-[#19b5af] focus:ring-[#19b5af]",
                     }}
                   />
+
+                  {/* Star Rating Field */}
+                  <div>
+                    <Text className="text-gray-900 font-bold mb-2">Your Rating</Text>
+                    <Rating
+                      size="lg"
+                      count={5}
+                      value={form.values.star}
+                      onChange={(value) => form.setFieldValue("star", value)}
+                      emptySymbol={<Star size={32} className="text-gray-300" />}
+                      fullSymbol={<Star size={32} className="text-amber-400 fill-amber-400" />}
+                    />
+                    {form.errors.star && (
+                      <Text size="sm" className="text-red-500 mt-1">
+                        {form.errors.star}
+                      </Text>
+                    )}
+                  </div>
 
                   {/* Submit Button */}
                   <motion.div
