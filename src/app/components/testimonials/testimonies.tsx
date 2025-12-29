@@ -1,22 +1,25 @@
 "use client";
 
 import { Carousel } from "@mantine/carousel";
-import { Avatar, Box, Container, Group, Paper, Stack, Text, Title } from "@mantine/core";
+import { Avatar, Box, Center, Container, Group, Loader, Paper, Stack, Text, Title } from "@mantine/core";
 import Autoplay from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
 import { Quote, Star } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { fetchFeedback, type FeedbackItem } from "../../../shared/api/feedbackApi";
 
 const TestimonialCard = ({
   name,
   role,
   content,
   image,
+  star = 5,
 }: {
   name: string;
   role: string;
   content: string;
   image: string;
+  star?: number;
 }) => {
   return (
     <motion.div
@@ -59,7 +62,7 @@ const TestimonialCard = ({
           {/* Right: Feedback */}
           <div className="flex-1 flex flex-col justify-center">
             <Group gap={4} mb="xs" className="justify-center sm:justify-start">
-              {[...Array(5)].map((_, i) => (
+              {[...Array(star || 5)].map((_, i) => (
                 <Star key={i} size={16} className="text-amber-400 fill-amber-400" />
               ))}
             </Group>
@@ -92,6 +95,16 @@ export function Testimonials() {
     stopOnMouseEnter: false
   }));
 
+  const [testimonials, setTestimonials] = useState<Array<{
+    name: string;
+    role: string;
+    content: string;
+    image: string;
+    star: number;
+  }>>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
@@ -112,15 +125,41 @@ export function Testimonials() {
     };
   }, []);
 
-  const testimonials = [
-    {
-      name: "Getahun H",
-      role: "",
-      content:
-        "Big thanks to Dr. Hilena for the excellent care. From the first visit, she made everything comfortable and stress-free. She's very skilled, attentive, and respectful, and the results exceeded my expectations. I'll definitely come back and recommend her to others.",
-      image: "",
-    },
-  ];
+  useEffect(() => {
+    const loadFeedback = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Get JWT token from environment variable or use the provided one
+        // You can set this in your .env.local file as NEXT_PUBLIC_FEEDBACK_JWT_TOKEN
+        const authToken = process.env.NEXT_PUBLIC_FEEDBACK_JWT_TOKEN ||
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzk4NTcyMzQ5LCJpYXQiOjE3NjcwMzYzNDksImp0aSI6IjU4M2Y5YmU1ZjYyOTRkNDA4M2RlMzNjYzJiMTg1MzE0IiwidXNlcl9pZCI6IjIiLCJ1c2VybmFtZSI6ImFkbWluMUBnbWFpbC5jb20ifQ.K4ri2n2bxeCjyOQGF7VzAzNEm2IYa41xmyUwoJCBWpA";
+
+        const response = await fetchFeedback(authToken);
+
+        // Map API response to component format
+        const mappedTestimonials = response.results.map((item: FeedbackItem) => ({
+          name: item.fullname,
+          role: "", // API doesn't provide role
+          content: item.feedback,
+          image: "", // API doesn't provide image
+          star: item.star,
+        }));
+
+        setTestimonials(mappedTestimonials);
+      } catch (err: any) {
+        console.error("Failed to load feedback:", err);
+        setError(err.message || "Failed to load testimonials");
+        // Fallback to empty array or default testimonial if needed
+        setTestimonials([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadFeedback();
+  }, []);
 
   return (
     <Box id="testimonials" component="section" className="py-12 md:py-16 bg-[#FDFDFD] overflow-hidden">
@@ -142,40 +181,58 @@ export function Testimonials() {
           </motion.div>
         </Stack>
 
-        <Carousel
-          loop={false}
-          slideSize={{ base: "100%", md: "100%" }}
-          slideGap={{ base: "xl", md: "3rem" }}
-          align="start"
-          slidesToScroll={1}
-          plugins={[]}
-          styles={{
-            root: {
-              overflow: 'visible'
-            },
-            viewport: {
-              overflow: 'visible',
-              scrollBehavior: 'smooth'
-            },
-            container: {
-              transition: 'transform 2s linear',
-              willChange: 'transform'
-            },
-            control: {
-              display: 'none'
-            },
-            controls: {
-              display: 'none'
-            }
-          }}
-          className="relative"
-        >
-          {testimonials.map((testimonial, index) => (
-            <Carousel.Slide key={index}>
-              <TestimonialCard {...testimonial} />
-            </Carousel.Slide>
-          ))}
-        </Carousel>
+        {loading ? (
+          <Center py="xl">
+            <Loader size="lg" color="#19b5af" />
+          </Center>
+        ) : error ? (
+          <Center py="xl">
+            <Text c="red" size="lg">
+              {error}
+            </Text>
+          </Center>
+        ) : testimonials.length === 0 ? (
+          <Center py="xl">
+            <Text c="gray" size="lg">
+              No testimonials available at the moment.
+            </Text>
+          </Center>
+        ) : (
+          <Carousel
+            loop={testimonials.length > 1}
+            slideSize={{ base: "100%", md: "100%" }}
+            slideGap={{ base: "xl", md: "3rem" }}
+            align="start"
+            slidesToScroll={1}
+            plugins={testimonials.length > 1 ? [autoplay.current] : []}
+            styles={{
+              root: {
+                overflow: 'visible'
+              },
+              viewport: {
+                overflow: 'visible',
+                scrollBehavior: 'smooth'
+              },
+              container: {
+                transition: 'transform 2s linear',
+                willChange: 'transform'
+              },
+              control: {
+                display: 'none'
+              },
+              controls: {
+                display: 'none'
+              }
+            }}
+            className="relative"
+          >
+            {testimonials.map((testimonial, index) => (
+              <Carousel.Slide key={index}>
+                <TestimonialCard {...testimonial} />
+              </Carousel.Slide>
+            ))}
+          </Carousel>
+        )}
       </Container>
     </Box>
   );

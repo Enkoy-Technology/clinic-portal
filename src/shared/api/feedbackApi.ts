@@ -14,6 +14,28 @@ export interface CreateFeedbackError {
   [key: string]: any;
 }
 
+export interface FeedbackItem {
+  id: number;
+  fullname: string;
+  feedback: string;
+  star: number;
+  is_visible: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface FetchFeedbackResponse {
+  links: {
+    next: string | null;
+    previous: string | null;
+  };
+  count: number;
+  results: FeedbackItem[];
+  page_size: number;
+  current_page: number;
+  total_pages: number;
+}
+
 /**
  * Creates a feedback submission
  * Uses Next.js API route proxy to avoid CORS issues
@@ -56,6 +78,38 @@ export async function createFeedback(
       message: "Failed to submit feedback",
     }));
     throw new Error(errorData.message || "Failed to submit feedback");
+  }
+
+  return response.json();
+}
+
+/**
+ * Fetches visible feedback from the API
+ * Uses Next.js API route proxy to avoid CORS issues
+ */
+export async function fetchFeedback(
+  authToken?: string
+): Promise<FetchFeedbackResponse> {
+  const headers: HeadersInit = {
+    accept: "application/json",
+  };
+
+  // Add authorization header if token is provided
+  if (authToken) {
+    headers["Authorization"] = `JWT ${authToken}`;
+  }
+
+  // Use local API route proxy to avoid CORS issues
+  const response = await fetch("/api/messages/feedback/list?is_visible=true", {
+    method: "GET",
+    headers,
+  });
+
+  if (!response.ok) {
+    const errorData: CreateFeedbackError = await response.json().catch(() => ({
+      message: "Failed to fetch feedback",
+    }));
+    throw new Error(errorData.message || "Failed to fetch feedback");
   }
 
   return response.json();
