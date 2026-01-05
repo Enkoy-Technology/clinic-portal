@@ -1,5 +1,3 @@
-const API_BASE_URL = "https://ff-gng8.onrender.com/api";
-
 export interface CreateMessageRequest {
   name: string;
   phone_number: string;
