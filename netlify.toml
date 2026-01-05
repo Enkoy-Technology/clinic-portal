@@ -1,0 +1,15 @@
+[build]
+  command = "pnpm build"
+  publish = ".next"
+
+[functions]
+  # Increase timeout for serverless functions
+  # Free tier: max 10s, Pro: max 26s, Business: max 60s
+  # Note: Next.js API routes might have different limits
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/next"
+  status = 200
+
