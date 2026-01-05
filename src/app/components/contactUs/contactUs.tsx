@@ -15,15 +15,7 @@ import {
 import { notifications } from "@mantine/notifications";
 import { Clock, Mail, Phone, Send } from "lucide-react";
 import { useState } from "react";
-
-const COUNTRY_CODE = "+251";
-
-function normalizeETPhone(input: string) {
-  const digits = input.replace(/[^\d]/g, "");
-  const local = digits.startsWith("251") ? digits.slice(3) : digits;
-  const trimmed = local.slice(0, 9);
-  return trimmed;
-}
+import { createMessage } from "../../../shared/api/messagesApi";
 
 export function ContactSection() {
   const [isLoading, setIsLoading] = useState(false);
@@ -48,28 +40,13 @@ export function ContactSection() {
 
     try {
       setIsLoading(true);
-      const normalizedPhone = normalizeETPhone(formData.phone);
-      const fullPhoneNumber = COUNTRY_CODE + normalizedPhone;
 
-      const payload = {
-        name: formData.fullName.trim(),
-        phone_number: fullPhoneNumber,
-        message: formData.message.trim(),
-      };
-
-      const response = await fetch("https://ff-gng8.onrender.com/api/messages/create/", {
-        method: "POST",
-        headers: {
-          "accept": "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+      // Use the createMessage function which uses the API proxy to avoid CORS issues
+      await createMessage({
+        name: formData.fullName,
+        phone: formData.phone,
+        message: formData.message,
       });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || "Failed to send message");
-      }
 
       notifications.show({
         title: 'Message Sent Successfully 🎉',

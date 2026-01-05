@@ -36,6 +36,7 @@ export function formatPhoneWithCountryCode(phone: string, countryCode: string = 
 
 /**
  * Creates a message/contact request
+ * Uses Next.js API route proxy to avoid CORS issues
  */
 export async function createMessage(
   data: Omit<CreateMessageRequest, "phone_number"> & { phone: string }
@@ -48,7 +49,8 @@ export async function createMessage(
     message: data.message.trim(),
   };
 
-  const response = await fetch(`${API_BASE_URL}/messages/create/`, {
+  // Use local API route proxy to avoid CORS issues
+  const response = await fetch("/api/messages/create", {
     method: "POST",
     headers: {
       accept: "application/json",

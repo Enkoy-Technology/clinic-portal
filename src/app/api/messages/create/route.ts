@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const API_BASE_URL = "https://demo-oxua.onrender.com/api";
+const API_BASE_URL = "https://ff-gng8.onrender.com/api";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    console.log("🔍 Feedback API Proxy received body:", JSON.stringify(body, null, 2));
+    console.log("🔍 Messages API Proxy received body:", JSON.stringify(body, null, 2));
 
-    const response = await fetch(`${API_BASE_URL}/messages/feedback/create/`, {
+    const response = await fetch(`${API_BASE_URL}/messages/create/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,14 +33,11 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(data, { status: response.status });
   } catch (error: any) {
-    console.error("Feedback API Proxy Error:", error);
+    console.error("Messages API Proxy Error:", error);
     return NextResponse.json(
       { error: "Internal server error", message: error.message },
       { status: 500 }
     );
   }
 }
-
-
-
 
